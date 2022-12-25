@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { MetamaskStateProvider } from "use-metamask";
-import { app, db } from "./FIrebase";
-import {  setDoc, doc } from "firebase/firestore";
-// import { getAuth } from "firebase/auth";
-// import {ethereum} from "web3"
+import {  db } from "./FIrebase";
+
+import { collection, addDoc } from "firebase/firestore"; 
 
 
 
@@ -13,7 +12,7 @@ const Hero = () => {
   // var ethereum;
   const [address, setAddress] = useState(null);
   const [balance, setBalance] = useState(null);
-
+console.log(address)
   const handleAction = (event) => {
     
     let account;
@@ -21,8 +20,7 @@ const Hero = () => {
       account = accounts[0];
       setAddress(account);
       // console.log(account);
-      ethereum
-        .request({
+      ethereum.request({
           method: "eth_getBalance",
           params: [account, "latest"],
         })
@@ -32,19 +30,18 @@ const Hero = () => {
         });
     });
   };
-  const firebaseAdd=(e)=>{
+  const firebaseAdd= async(e)=>{
 
-    e.preventDefault( );
-    // let res;
-    setDoc(doc(db, "users"), 
-      {
-        address,
-        balance,
-        
-      },
-      setAddress,
-      setBalance
-    );
+    try {
+      const docRef = await addDoc(collection(db, "users"), {
+         address,
+         balance,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+    
 
     // e.preventDefault();
     // const auth = getAuth();
