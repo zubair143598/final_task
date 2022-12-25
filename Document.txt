@@ -1,0 +1,4 @@
+1)created metamask erheurm account
+2)then i connect  it with button 
+3)through which i get the account address and and wallet balance and display on the user ui
+4)then connect with firebase 
