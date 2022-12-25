@@ -14,7 +14,7 @@ const Hero = () => {
   const [balance, setBalance] = useState(null);
 console.log(address)
   const handleAction = (event) => {
-    
+    let ethereum=window.ethereum;
     let account;
     ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
       account = accounts[0];
