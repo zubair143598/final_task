@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { MetamaskStateProvider } from "use-metamask";
+// import { MetamaskStateProvider } from "use-metamask";
 import {  db } from "./FIrebase";
 
 import { collection, addDoc } from "firebase/firestore"; 
